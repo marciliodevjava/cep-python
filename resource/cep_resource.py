@@ -9,4 +9,4 @@ class Cep(Resource):
     def get(self):
         cep = request.args.get('cep')
         cep = CepService.verifica_cep(cep)
-        return cep
+        return cep, 200
