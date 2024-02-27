@@ -1,7 +1,8 @@
 import requests
 
-from variaveis.variaveis import URL_VIA_CEP, FORMATO_JSON
 from enuns.menssage_enum import CepMessagem
+from variaveis.variaveis import URL_VIA_CEP, FORMATO_JSON
+
 
 class CepService:
     @classmethod
@@ -22,16 +23,16 @@ class CepService:
         URL = f'{URL_VIA_CEP}{cep}{FORMATO_JSON}'
         requisicao = requests.get(URL)
         if requisicao.status_code == 200:
-            cep = requisicao.json() if requisicao.json() else None
-            verifica = cep['erro']
+            cep = [requisicao.json() if requisicao.json() else None]
+            verifica = cep[0].get('erro', None)
             if verifica:
                 return {
-                    'message': CepMessagem.MENSAGEM_RETORNO_NONE
+                    'message': CepMessagem.MENSAGEM_RETORNO_NONE.value
                 }
             return {
-                'cep': cep['cep'],
-                'logradouro': cep['logradouro'],
-                'bairro': cep['bairro'],
-                'uf': cep['uf'],
-                'ddd': cep['ddd']
-            } , 200
+                'cep': str(cep[0]['cep']),
+                'logradouro': str(cep[0]['logradouro']),
+                'bairro': str(cep[0]['bairro']),
+                'uf': str(cep[0]['uf']),
+                'ddd': str(cep[0]['ddd'])
+            }
