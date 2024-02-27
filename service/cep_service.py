@@ -1,6 +1,6 @@
 import requests
 
-from enuns.menssage_enum import CepMessagem
+from enuns.mensage_enum import CepMessagem
 from variaveis.variaveis import URL_VIA_CEP, FORMATO_JSON
 
 
