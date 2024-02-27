@@ -36,3 +36,7 @@ class CepService:
                 'uf': str(cep[0]['uf']),
                 'ddd': str(cep[0]['ddd'])
             }
+        else:
+            return {
+                'message': CepMessagem.MENSAGEM_RETORNO_500.value
+            }
